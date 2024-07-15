@@ -29,13 +29,29 @@ lazy val root = projectMatrix
   .enablePlugins(NoPublishPlugin)
   .aggregate((modules :+ docs.project).map(_.project): _*)
 
-lazy val modules = List(core).flatMap(_.projectRefs)
+lazy val modules = List(avro,jsonSchema).flatMap(_.projectRefs)
 
-lazy val core = projectMatrix
-  .in(file("core"))
+lazy val avro = projectMatrix
+  .in(file("avro"))
   .jvmPlatform(autoScalaLibrary = false)
   .settings(
-    name := "core",
+    name := "avro",
+    libraryDependencies ++= Seq(
+      "software.amazon.smithy" % "smithy-build" % "1.46.0"
+    ),
+    Compile / packageSrc / mappings := (Compile / packageSrc / mappings).value
+      .filterNot { case (file, path) =>
+        path.equalsIgnoreCase("META-INF/smithy/manifest")
+      },
+    resolvers += Resolver.mavenLocal,
+    javacOptions ++= Seq("--release", "11")
+  )
+
+lazy val jsonSchema = projectMatrix
+  .in(file("jsonSchema"))
+  .jvmPlatform(autoScalaLibrary = false)
+  .settings(
+    name := "json-schema",
     libraryDependencies ++= Seq(
       "software.amazon.smithy" % "smithy-build" % "1.46.0"
     ),
