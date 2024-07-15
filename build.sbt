@@ -32,7 +32,7 @@ lazy val root = projectMatrix
 lazy val modules = List(avro,jsonSchema).flatMap(_.projectRefs)
 
 lazy val avro = projectMatrix
-  .in(file("avro"))
+  .in(file("modules/avro"))
   .jvmPlatform(autoScalaLibrary = false)
   .settings(
     name := "avro",
@@ -48,7 +48,7 @@ lazy val avro = projectMatrix
   )
 
 lazy val jsonSchema = projectMatrix
-  .in(file("jsonSchema"))
+  .in(file("modules/jsonSchema"))
   .jvmPlatform(autoScalaLibrary = false)
   .settings(
     name := "json-schema",
