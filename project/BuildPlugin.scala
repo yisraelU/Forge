@@ -1,5 +1,14 @@
-import org.typelevel.sbt.TypelevelCiPlugin.autoImport.tlCiHeaderCheck
+import org.typelevel.sbt.TypelevelCiPlugin.autoImport.{
+  tlCiDependencyGraphJob,
+  tlCiHeaderCheck,
+  tlCiMimaBinaryIssueCheck
+}
 import org.typelevel.sbt.TypelevelGitHubPlugin.autoImport.tlGitHubDev
+import org.typelevel.sbt.TypelevelSettingsPlugin.autoImport.{
+  tlFatalWarnings,
+  tlJdkRelease
+}
+import org.typelevel.sbt.TypelevelSonatypePlugin.autoImport.tlSonatypeUseLegacyHost
 import org.typelevel.sbt.TypelevelVersioningPlugin.autoImport.tlBaseVersion
 import sbt.Keys.*
 import sbt.nio.Keys.{ReloadOnSourceChanges, onChangedBuildSource}
@@ -8,6 +17,7 @@ import scalafix.sbt.ScalafixPlugin.autoImport.{
   scalafixScalaBinaryVersion,
   scalafixSemanticdb
 }
+import xerial.sbt.Sonatype.autoImport.sonatypeProfileName
 
 object BuildPlugin extends AutoPlugin {
   override def trigger = allRequirements
@@ -41,7 +51,14 @@ object BuildPlugin extends AutoPlugin {
       // your GitHub handle and name
       tlGitHubDev("yisraelu", "Yisrael Union")
     ),
-    ThisBuild / tlCiHeaderCheck := false
+    ThisBuild / tlCiHeaderCheck := false,
+    ThisBuild / tlFatalWarnings := false,
+    ThisBuild / tlCiMimaBinaryIssueCheck := false,
+    ThisBuild / sonatypeProfileName := "io.github.yisraelu",
+    ThisBuild / tlJdkRelease := Some(11),
+    ThisBuild / tlCiDependencyGraphJob := false,
+    // publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
+    ThisBuild / tlSonatypeUseLegacyHost := false
   )
 
   lazy val compilerPlugins = Seq(
