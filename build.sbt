@@ -8,19 +8,18 @@ val Scala213 = Seq("2.13.13")
 val Scala3 = Seq("3.3.3")
 val LatestTwoScala = Scala213 ++ Scala3
 
-lazy val root = projectMatrix
+lazy val root = project
   .in(file("."))
   .settings(
     name := "smithy-forge"
   )
   .enablePlugins(NoPublishPlugin)
-  .aggregate((modules :+ docs.project).map(_.project): _*)
+  .aggregate(modules.map(_.project): _*)
 
-lazy val modules = List(avro, jsonSchema).flatMap(_.projectRefs)
+lazy val modules = List(avro, jsonSchema,docs)
 
-lazy val avro = projectMatrix
+lazy val avro = project
   .in(file("modules/avro"))
-  .jvmPlatform(autoScalaLibrary = false)
   .settings(
     name := "avro",
     libraryDependencies ++= Seq(
@@ -34,9 +33,8 @@ lazy val avro = projectMatrix
     javacOptions ++= Seq("--release", "11")
   )
 
-lazy val jsonSchema = projectMatrix
+lazy val jsonSchema = project
   .in(file("modules/jsonSchema"))
-  .jvmPlatform(autoScalaLibrary = false)
   .settings(
     name := "json-schema",
     libraryDependencies ++= Seq(
