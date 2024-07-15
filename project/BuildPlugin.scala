@@ -1,7 +1,10 @@
 import org.typelevel.sbt.TypelevelCiPlugin.autoImport.{
   tlCiDependencyGraphJob,
+  tlCiDocCheck,
   tlCiHeaderCheck,
-  tlCiMimaBinaryIssueCheck
+  tlCiMimaBinaryIssueCheck,
+  tlCiScalafixCheck,
+  tlCrossRootProject
 }
 import org.typelevel.sbt.TypelevelGitHubPlugin.autoImport.tlGitHubDev
 import org.typelevel.sbt.TypelevelSettingsPlugin.autoImport.{
@@ -55,10 +58,11 @@ object BuildPlugin extends AutoPlugin {
     ThisBuild / tlFatalWarnings := false,
     ThisBuild / tlCiMimaBinaryIssueCheck := false,
     ThisBuild / sonatypeProfileName := "io.github.yisraelu",
-    ThisBuild / tlJdkRelease := Some(11),
+    ThisBuild / tlJdkRelease := Some(17),
     ThisBuild / tlCiDependencyGraphJob := false,
     // publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
-    ThisBuild / tlSonatypeUseLegacyHost := false
+    ThisBuild / tlSonatypeUseLegacyHost := false,
+    ThisBuild / tlCiScalafixCheck := false
   )
 
   lazy val compilerPlugins = Seq(
