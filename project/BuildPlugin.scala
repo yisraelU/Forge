@@ -1,6 +1,9 @@
+import org.typelevel.sbt.TypelevelCiPlugin.autoImport.tlCiHeaderCheck
+import org.typelevel.sbt.TypelevelGitHubPlugin.autoImport.tlGitHubDev
+import org.typelevel.sbt.TypelevelVersioningPlugin.autoImport.tlBaseVersion
 import sbt.Keys.*
 import sbt.nio.Keys.{ReloadOnSourceChanges, onChangedBuildSource}
-import sbt.*
+import sbt.{ThisBuild, *}
 import scalafix.sbt.ScalafixPlugin.autoImport.{
   scalafixScalaBinaryVersion,
   scalafixSemanticdb
@@ -15,7 +18,7 @@ object BuildPlugin extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] = Seq(
     organization := "com.caesars.pam",
     scalacOptions ++= compilerOptions(scalaVersion.value)
-  ) ++ scalafixSettings ++ compilerPlugins
+  ) ++ scalafixSettings ++ compilerPlugins ++ tlCiSettings
 
   private lazy val reloadSetting =
     Global / onChangedBuildSource := ReloadOnSourceChanges
@@ -25,6 +28,20 @@ object BuildPlugin extends AutoPlugin {
     // Scalafix configuration
     ThisBuild / semanticdbEnabled := true,
     ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+  )
+
+  lazy val tlCiSettings = Seq(
+    // https://typelevel.org/sbt-typelevel/faq.html#what-is-a-base-version-anyway
+    ThisBuild / tlBaseVersion := "0.0", // your current series x.y
+    ThisBuild / organization := "io.github.yisraelu",
+    ThisBuild / organizationName := "Forge",
+    ThisBuild / startYear := Some(2023),
+    ThisBuild / licenses := Seq(License.Apache2),
+    ThisBuild / developers := List(
+      // your GitHub handle and name
+      tlGitHubDev("yisraelu", "Yisrael Union")
+    ),
+    ThisBuild / tlCiHeaderCheck := false
   )
 
   lazy val compilerPlugins = Seq(
