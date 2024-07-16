@@ -44,5 +44,4 @@ lazy val commonSettings =
     javacOptions ++= Seq("--release", "11"),
     autoScalaLibrary := false,
     doc / sources := Nil
-
   )

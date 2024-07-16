@@ -1,12 +1,24 @@
-import org.typelevel.sbt.TypelevelCiPlugin.autoImport.{tlCiDependencyGraphJob, tlCiDocCheck, tlCiHeaderCheck, tlCiMimaBinaryIssueCheck, tlCiScalafixCheck}
+import org.typelevel.sbt.TypelevelCiPlugin.autoImport.{
+  tlCiDependencyGraphJob,
+  tlCiDocCheck,
+  tlCiHeaderCheck,
+  tlCiMimaBinaryIssueCheck,
+  tlCiScalafixCheck
+}
 import org.typelevel.sbt.TypelevelGitHubPlugin.autoImport.tlGitHubDev
-import org.typelevel.sbt.TypelevelSettingsPlugin.autoImport.{tlFatalWarnings, tlJdkRelease}
+import org.typelevel.sbt.TypelevelSettingsPlugin.autoImport.{
+  tlFatalWarnings,
+  tlJdkRelease
+}
 import org.typelevel.sbt.TypelevelSonatypePlugin.autoImport.tlSonatypeUseLegacyHost
 import org.typelevel.sbt.TypelevelVersioningPlugin.autoImport.tlBaseVersion
 import sbt.Keys.*
 import sbt.nio.Keys.{ReloadOnSourceChanges, onChangedBuildSource}
 import sbt.{ThisBuild, *}
-import scalafix.sbt.ScalafixPlugin.autoImport.{scalafixScalaBinaryVersion, scalafixSemanticdb}
+import scalafix.sbt.ScalafixPlugin.autoImport.{
+  scalafixScalaBinaryVersion,
+  scalafixSemanticdb
+}
 import xerial.sbt.Sonatype.autoImport.sonatypeProfileName
 
 object BuildPlugin extends AutoPlugin {
@@ -15,7 +27,8 @@ object BuildPlugin extends AutoPlugin {
   override def globalSettings: Seq[Def.Setting[_]] = Seq(reloadSetting) ++
     addCommandAlias("lint", "; scalafmtSbt; scalafmtAll; scalafixAll; ")
 
-  override def projectSettings: Seq[Setting[_]] =  scalafixSettings  ++ tlCiSettings
+  override def projectSettings: Seq[Setting[_]] =
+    scalafixSettings ++ tlCiSettings
 
   private lazy val reloadSetting =
     Global / onChangedBuildSource := ReloadOnSourceChanges
@@ -49,8 +62,5 @@ object BuildPlugin extends AutoPlugin {
     ThisBuild / tlCiScalafixCheck := false,
     ThisBuild / tlCiDocCheck := false
   )
-
-
-
 
 }
