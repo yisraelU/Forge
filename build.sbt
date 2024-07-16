@@ -5,7 +5,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 // publish website from this branch
 ThisBuild / tlSitePublishBranch := Some("main")
 
-lazy val root = project
+lazy val root = projectMatrix
   .in(file("."))
   .settings(
     name := "smithy-forge"
@@ -34,12 +34,15 @@ lazy val docs = project.in(file("site")).enablePlugins(TypelevelSitePlugin)
 lazy val commonSettings =
   Seq(
     libraryDependencies ++= Seq(
-      "software.amazon.smithy" % "smithy-build" % "1.49.0"
+      "software.amazon.smithy" % "smithy-build" % "1.50.0"
     ),
     Compile / packageSrc / mappings := (Compile / packageSrc / mappings).value
       .filterNot { case (file, path) =>
         path.equalsIgnoreCase("META-INF/smithy/manifest")
       },
     resolvers += Resolver.mavenLocal,
-    javacOptions ++= Seq("--release", "11")
+    javacOptions ++= Seq("--release", "11"),
+    autoScalaLibrary := false,
+    doc / sources := Nil
+
   )
