@@ -34,7 +34,6 @@ object BuildPlugin extends AutoPlugin {
     Global / onChangedBuildSource := ReloadOnSourceChanges
 
   private lazy val scalafixSettings = Seq(
-    ThisBuild / scalafixScalaBinaryVersion := "2.13",
     // Scalafix configuration
     ThisBuild / semanticdbEnabled := true,
     ThisBuild / semanticdbVersion := scalafixSemanticdb.revision

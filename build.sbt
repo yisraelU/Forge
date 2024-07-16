@@ -5,7 +5,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 // publish website from this branch
 ThisBuild / tlSitePublishBranch := Some("main")
 
-lazy val root = projectMatrix
+lazy val root = project
   .in(file("."))
   .settings(
     name := "smithy-forge"
