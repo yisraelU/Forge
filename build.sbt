@@ -29,7 +29,9 @@ lazy val jsonSchema = project
   )
   .settings(commonSettings)
 
-lazy val docs = project.in(file("site")).enablePlugins(TypelevelSitePlugin)
+lazy val docs = project
+  .in(file("site"))
+  .enablePlugins(TypelevelSitePlugin)
 
 lazy val commonSettings =
   Seq(

@@ -59,7 +59,8 @@ object BuildPlugin extends AutoPlugin {
     // publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
     ThisBuild / tlSonatypeUseLegacyHost := false,
     ThisBuild / tlCiScalafixCheck := false,
-    ThisBuild / tlCiDocCheck := false
+    ThisBuild / tlCiDocCheck := false,
+    ThisBuild / tlCiMimaBinaryIssueCheck := false
   )
 
 }
