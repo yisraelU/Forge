@@ -2,7 +2,7 @@ import scala.collection.immutable.Seq
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 // publish website from this branch
-//ThisBuild / tlSitePublishBranch := Some("main")
+ThisBuild / tlSitePublishBranch := Some("main")
 // https://typelevel.org/sbt-typelevel/faq.html#what-is-a-base-version-anyway
 ThisBuild / tlBaseVersion := "0.0" // your current series x.y
 ThisBuild / organization := "io.github.yisraelu"
