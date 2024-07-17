@@ -69,3 +69,5 @@ lazy val commonSettings =
     javacOptions ++= Seq("--release", "11"),
     autoScalaLibrary := false
   )
+
+addCommandAlias("lint", ";scalafmtAll;scalafmtSbt;")
