@@ -25,7 +25,8 @@ ThisBuild / tlCiScalafixCheck := false
 ThisBuild / tlCiDocCheck := false
 ThisBuild / tlCiMimaBinaryIssueCheck := false
 
-lazy val root = project
+val projectPrefix = "smithy-forge"
+lazy val root     = project
   .in(file("."))
   .settings(
     name := "smithy-forge"
@@ -39,14 +40,14 @@ lazy val modules = List(avro, jsonSchema, docs)
 lazy val avro = project
   .in(file("modules/avro"))
   .settings(
-    name := "avro"
+    name := s"$projectPrefix-avro"
   )
   .settings(commonSettings)
 
 lazy val jsonSchema = project
   .in(file("modules/jsonSchema"))
   .settings(
-    name := "json-schema"
+    name := s"$projectPrefix-jsonschema"
   )
   .settings(commonSettings)
 
