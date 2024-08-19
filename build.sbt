@@ -5,7 +5,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 ThisBuild / tlSitePublishBranch := Some("main")
 // https://typelevel.org/sbt-typelevel/faq.html#what-is-a-base-version-anyway
 ThisBuild / tlBaseVersion := "0.0" // your current series x.y
-ThisBuild / organization := "io.github.yisraelu"
+ThisBuild / organization := "io.github.yisraelu.forge"
 ThisBuild / organizationName := "Smithy-Forge"
 ThisBuild / startYear := Some(2024)
 ThisBuild / licenses := Seq(License.Apache2)
@@ -25,11 +25,11 @@ ThisBuild / tlCiScalafixCheck := false
 ThisBuild / tlCiDocCheck := false
 ThisBuild / tlCiMimaBinaryIssueCheck := false
 
-val projectPrefix = "smithy-forge"
+val projectPrefix = "forge"
 lazy val root     = project
   .in(file("."))
   .settings(
-    name := "smithy-forge"
+    name := "forge"
   )
   .settings(commonSettings)
   .enablePlugins(NoPublishPlugin)

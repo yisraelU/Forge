@@ -1,5 +1,4 @@
 import sbt._
-import org.portablescala.sbtplatformdeps.PlatformDepsGroupID._
 object Dependencies {
 
   object Smithy {
