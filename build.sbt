@@ -68,6 +68,7 @@ lazy val commonSettings =
       },
     resolvers += Resolver.mavenLocal,
     javacOptions ++= Seq("--release", "11"),
+    crossPaths := false,
     autoScalaLibrary := false
   )
 

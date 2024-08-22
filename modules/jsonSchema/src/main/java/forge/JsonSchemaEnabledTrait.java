@@ -1,8 +1,6 @@
 package forge;
 
-import software.amazon.smithy.model.SourceException;
 import software.amazon.smithy.model.node.Node;
-import software.amazon.smithy.model.node.ObjectNode;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.traits.*;
 import software.amazon.smithy.utils.ToSmithyBuilder;
