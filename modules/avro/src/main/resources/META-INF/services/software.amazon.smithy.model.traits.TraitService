@@ -9,4 +9,3 @@ forge.AvroSchema$Provider
 forge.AvroDecimalTrait$Provider
 forge.AvroOrderTrait$Provider
 forge.logicalTypes.UuidFormat$Provider
-forge.ScaleTrait$Provider
