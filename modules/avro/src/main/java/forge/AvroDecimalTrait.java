@@ -16,8 +16,14 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
     public static ShapeId ID = ShapeId.from("forge#avroDecimal");
 
     // must be 0 or greater
-    private final Integer precision;
-    private final Integer scale;
+    private final Integer precision ;
+    private final Integer scale ;
+    private final Underlying underlying ;
+
+   public enum Underlying {
+        BYTES,
+        FIXED
+    }
 
 
     @Override
@@ -26,6 +32,7 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
                 .sourceLocation(getSourceLocation())
                 .withMember("precision", Node.from(precision))
                 .withMember("scale", Node.from(scale))
+                .withMember("underlying", Node.from(underlying.toString()))
                 .build();
     }
 
@@ -38,13 +45,18 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
         return scale;
     }
 
+    public Underlying getUnderlying() {
+        return underlying;
+    }
+
 
 
     private AvroDecimalTrait(AvroDecimalTrait.Builder builder) {
         super(ID, builder.getSourceLocation());
         this.precision = Objects.requireNonNull(builder.precision, "precision must be defined");
         this.scale = Objects.requireNonNull(builder.scale, "scale must be defined");
-      if (precision < 0 || scale < 0) {
+        this.underlying = builder.underlying;
+      if (precision <= 0 || scale <= 0) {
             throw new SourceException("precision and scale must be greater than 0", getSourceLocation());
         }
     }
@@ -55,12 +67,13 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
 
     @Override
     public  AvroDecimalTrait.Builder toBuilder() {
-        return new AvroDecimalTrait.Builder().sourceLocation(getSourceLocation()).precision(precision).scale(scale);
+        return new AvroDecimalTrait.Builder().sourceLocation(getSourceLocation()).precision(precision).scale(scale).underlying(underlying);
     }
 
     public static final class Builder extends AbstractTraitBuilder<AvroDecimalTrait, AvroDecimalTrait.Builder> {
         private Integer precision;
         private Integer scale;
+        private Underlying underlying = Underlying.BYTES;
 
         public AvroDecimalTrait.Builder precision(Integer precision) {
             this.precision = precision;
@@ -69,6 +82,11 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
 
         public AvroDecimalTrait.Builder scale(Integer scale) {
             this.scale = scale;
+            return this;
+        }
+
+        public AvroDecimalTrait.Builder underlying(Underlying underlying) {
+            this.underlying = underlying;
             return this;
         }
 
@@ -91,7 +109,20 @@ public class AvroDecimalTrait extends AbstractTrait implements ToSmithyBuilder<A
 
             value.expectObjectNode()
                     .expectNumberMember("scale", n -> builder.scale(n.intValue()))
-                    .expectNumberMember("method", n -> builder.precision(n.intValue()));
+                    .expectNumberMember("method", n -> builder.precision(n.intValue()))
+                    .getStringMember("underlying", (underlying) -> {
+                        switch(underlying.toLowerCase())
+                        {
+                            case "bytes":
+                                builder.underlying(Underlying.BYTES);
+                                break;
+                            case "fixed":
+                                builder.underlying(Underlying.FIXED);
+                                break;
+                            default:
+                                throw new SourceException("underlying must be either bytes or fixed", value.getSourceLocation());
+                        }
+                    });
             return builder.build();
         }
     }

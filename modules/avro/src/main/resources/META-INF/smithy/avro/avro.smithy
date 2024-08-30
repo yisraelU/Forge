@@ -7,7 +7,7 @@ metadata suppressions = [
     }
 ]
 
-namespace forge
+namespace forge.avro
 
 @trait(selector: "service")
 structure avroEnabled {
@@ -52,12 +52,18 @@ structure avroFixed{
     size: Integer
 }
 
-@trait (selector: "blob")
+@trait (selector: "bigdecimal")
 structure avroDecimal {
     precision: Integer
     scale: Integer
+    underlyingType:UnderlyingType
 }
 
+enum  UnderlyingType {
+    BYTES,
+    FIXED
+
+}
 @trait(selector: "string")
 structure uuid {
 }
