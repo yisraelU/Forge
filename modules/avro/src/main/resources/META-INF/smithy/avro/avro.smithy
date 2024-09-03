@@ -18,10 +18,7 @@ structure avroSchema {
 }
 
 
-@trait(selector: "string")
-string avroName
-
-@trait(selector: "structure")
+@trait(selector: "*")
 structure avroName {
 }
 
@@ -52,7 +49,7 @@ structure avroFixed{
     size: Integer
 }
 
-@trait (selector: "bigdecimal")
+@trait(selector: "bigDecimal")
 structure avroDecimal {
     precision: Integer
     scale: Integer
@@ -68,7 +65,7 @@ enum  UnderlyingType {
 structure uuid {
 }
 
-@trait (selector: "timestamp")
+@trait(selector: "timestamp")
 structure avroTime {
     target: TimeStampTarget
 }
@@ -83,7 +80,7 @@ enum TimeStampTarget {
     LOCAL_TIMESTAMP_MICROS
 }
 
-@trait (selector: "string")
+@trait(selector: "string")
 structure order {
     target: OrderTarget
 }
