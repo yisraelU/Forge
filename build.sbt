@@ -60,7 +60,7 @@ lazy val commonSettings =
   Seq(
     javacOptions := Seq.empty,
     libraryDependencies ++= Seq(
-      "software.amazon.smithy" % "smithy-build" % "1.52.1"
+      "software.amazon.smithy" % "smithy-build" % "1.54.0"
     ),
     Compile / packageSrc / mappings := (Compile / packageSrc / mappings).value
       .filterNot { case (file, path) =>
