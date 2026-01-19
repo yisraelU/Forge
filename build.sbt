@@ -16,14 +16,10 @@ ThisBuild / developers := List(
 ThisBuild / tlCiHeaderCheck := false
 ThisBuild / tlFatalWarnings := false
 ThisBuild / tlCiMimaBinaryIssueCheck := false
-ThisBuild / sonatypeProfileName := "io.github.yisraelu"
 ThisBuild / tlJdkRelease := Some(11)
 ThisBuild / tlCiDependencyGraphJob := false
-// publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
-ThisBuild / tlSonatypeUseLegacyHost := false
 ThisBuild / tlCiScalafixCheck := false
 ThisBuild / tlCiDocCheck := false
-ThisBuild / tlCiMimaBinaryIssueCheck := false
 
 val projectPrefix = "forge"
 lazy val root     = project
