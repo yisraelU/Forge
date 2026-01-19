@@ -45,11 +45,9 @@ public class AvroTimeTrait extends AbstractTrait {
     }
 
     public static final class Provider extends AbstractTrait.Provider{
-        /**
-         * @param id ID of the trait that the provider creates.
-         */
-        public Provider(ShapeId id) {
-            super(id);
+
+        public Provider() {
+            super(ID);
         }
 
         @Override

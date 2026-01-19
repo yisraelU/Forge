@@ -8,4 +8,3 @@ forge.logicalTypes.AvroTimeTrait$Provider
 forge.AvroSchema$Provider
 forge.AvroDecimalTrait$Provider
 forge.AvroOrderTrait$Provider
-forge.logicalTypes.UuidFormat$Provider
